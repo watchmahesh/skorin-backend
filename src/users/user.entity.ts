@@ -23,9 +23,7 @@ export class User {
 
   @BeforeInsert()
   async hashPassword() {
-    console.log('Hashing password:', this.password);
     this.password = await bcrypt.hash(this.password, 10);
-    console.log('Hashed password:', this.password); // Should output the hashed password
   }
   async validatePassword(password: string): Promise<boolean> {
     console.log(password, this.password, await bcrypt.compareSync(password, this.password))

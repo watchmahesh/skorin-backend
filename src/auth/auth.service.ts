@@ -41,7 +41,12 @@ export class AuthService {
   }
 
   async register(user: User) {
-    return this.usersService.create(user);
+    try {
+      return this.usersService.create(user);
+    } catch (e) {
+      console.log(e)
+      throw new Error(e.message)
+    }
   }
 
   async refreshAccessToken(refreshToken: string) {
