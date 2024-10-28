@@ -25,6 +25,11 @@ export class Category1729614542773 implements MigrationInterface {
                   type: 'varchar',
                   length: '255',
                 },
+                {
+                  name: 'image',
+                  type: 'varchar',
+                  length: '255',
+                },
 
                 {
                   name: 'created_at',

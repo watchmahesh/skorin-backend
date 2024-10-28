@@ -31,9 +31,14 @@ export class UsersService {
         if (error instanceof HttpException) {
             throw error;
         }
-
         throw new HttpException('Internal server error', HttpStatus.INTERNAL_SERVER_ERROR);
     }
+    }
+
+    async update(email:string, updateItemDto: any): Promise<any> {
+        const item = await  this.usersRepository.findOne({ where: { email } });
+        Object.assign(item, updateItemDto);
+        return this.usersRepository.save(item);
     }
 
 }

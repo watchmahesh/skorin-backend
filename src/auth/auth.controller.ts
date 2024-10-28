@@ -36,7 +36,25 @@ export class AuthController {
     return this.authService.register(user);
   }
 
+  @Post('forgot-password')
+  async forgotPassword(@Body('email') email: string) {
+    const resetToken = await this.authService.generatePasswordResetToken(email);
 
+    // You need to send this token to the user's email using a mailing service
+    // await this.authService.sendPasswordResetEmail(email, resetToken);
+
+    return { message: 'Password reset email sent' };
+  }
+
+  @Post('reset-password')
+  async resetPassword(
+    @Body('token') token: string,
+    @Body('newPassword') newPassword: string
+  ) {
+    await this.authService.resetPassword(token, newPassword);
+
+
+  }
 
   @UseGuards(JwtAuthGuard)
   @Post('protected')

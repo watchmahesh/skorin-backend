@@ -12,6 +12,10 @@ export class Category {
     @Column({ type: 'text' })
     slug: string;
 
+    @Column({ type: 'text' })
+    image: string;
+
+
     @OneToMany(() => Product, (product) => product.category)
     products: Product[];
 
